@@ -56,11 +56,11 @@
 
 ## Troubleshooting
 
+### Shows generated chart from current chart dir
+`helm template .`
+
 ### Shows error in generated chart
 `helm lint`
-
-### Shows generated chart
-`helm template .`
 
 ### Shows error in generated chart by using help from kubectl
 `helm template . | kubectl apply -f -` 
