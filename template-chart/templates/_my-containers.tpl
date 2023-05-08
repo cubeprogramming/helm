@@ -4,7 +4,7 @@
   ports:
     - name: http
       containerPort: 80
-      protocol: tcp
+      protocol: TCP
 {{- end -}}
 
 {{- define "container2" -}}
@@ -13,5 +13,5 @@
   ports:
     - name: http
       containerPort: 80
-      protocol: tcp
+      protocol: TCP
 {{- end -}}

@@ -19,7 +19,7 @@ spec:
           ports:
             - name: http
               containerPort: 80
-              protocol: tcp
+              protocol: TCP
         {{- if eq .Values.container1.enabled true -}}
         {{- include "container1" . | nindent 8 }}
         {{- else -}}

@@ -24,6 +24,9 @@
 ### Installing chart from the current dir by using custom values file
 `helm install <CHART_NAME> . -f custom_values.yaml`
 
+### Upgrading chart
+`helm upgrade  <CHART_NAME> .`
+
 ### List all deployments
 `kubectl get deployment`
 
@@ -32,6 +35,9 @@
 
 ### List all deployments and services together
 `kubectl get deploy,svc`
+
+### List all objects
+`kubectl get all`
 
 ### Display metrics for pods and nodes
 `kubectl top node`
@@ -64,3 +70,52 @@
 
 ### Shows error in generated chart by using help from kubectl
 `helm template . | kubectl apply -f -` 
+
+## Working with Chart repositories
+
+### Listing registered repositories
+`helm repo list`
+
+### Adding repository
+`helm repo add chartmuseum https://chartmuseum.github.io/charts`
+
+### Updating repository
+`helm repo update`
+
+### Removing repository
+`helm repo remove chartmuseum`
+
+### Install Chart form repository
+`helm install chartmuseum/chartmuseum --generate-name`
+
+### Pull Chart form the repo
+`helm pull chartmuseum/chartmuseum` -- provides chart in .tgz format
+
+### Unpack and install chartmuseum
+```bash
+tar -xvf chartmuseum-3.9.3.tgz 
+# Change following values in  values.yaml
+DISABLE_API: false
+service:
+  type: NodePort
+  #externalTrafficPolicy: Local
+  nodePort: 30005
+
+helm install chartmuseum chartmusemum
+```
+
+### Adding localy running chartmuseum to a list of repositories
+`helm repo add our-repo http://localhost:30005`
+
+### Package the chart from current dir
+`helm package .` -- creates package in .tgz format in the same dir.
+
+### Pushing chart to repository
+`curl --data-binary "@my-chart-0.1.0.tgz" http://localhost:30005/api/charts`
+
+### Sarching the repo
+`helm search repo my-chart`
+
+### Installing chart form specific repo
+`helm install our-repo/my-chart --generate-name` or
+`helm install my-chart our-repo/my-chart`
